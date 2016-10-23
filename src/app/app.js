@@ -1,9 +1,8 @@
-var angular = require('angular');
-var uiRouter = require('angular-ui-router');
+import './vendors';
 
 import {routerConfig} from './routes';
 import {helloWorld} from './components/hello-world/hello-world.directive';
 
-angular.module('app',[uiRouter])
+angular.module('app', ['ui.router'])
 	.config(routerConfig)
 	.directive('helloWorld', helloWorld);
