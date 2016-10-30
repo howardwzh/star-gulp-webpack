@@ -28,6 +28,7 @@ module.exports = {
 	output: {
 		path: __dirname + '/public/',
 		filename: '[name]-[chunkhash].js',
+		// publicPath: __dirname + '/public/',
 		chunkFilename: '[name]-[chunkhash:8].js'
 	},
 	module: {
@@ -46,10 +47,12 @@ module.exports = {
 		}, {
 			test: /\.scss$/,
 			loader: ExtractTextPlugin.extract('style', 'css!sass!postcss')
-		}, {
-			test: /\.(png|jpg)$/,
-			loader: 'url-loader?limit=10000'
-		}, {
+		}, 
+		// {
+		// 	test: /\.(png|jpg)$/,
+		// 	loader: 'url-loader?limit=10000' //必须是相对路径
+		// }, 
+		{
 			test: /\.html$/,
 			loader: 'html'
 		}]
