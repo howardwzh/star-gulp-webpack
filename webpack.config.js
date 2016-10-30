@@ -27,7 +27,8 @@ module.exports = {
 	},
 	output: {
 		path: __dirname + '/public/',
-		filename: '[name]-[hash].js'
+		filename: '[name]-[chunkhash].js',
+		chunkFilename: '[name]-[chunkhash:8].js'
 	},
 	module: {
 		preLoaders: [{
@@ -40,12 +41,23 @@ module.exports = {
 			exclude: /node_modules/,
 			loaders: ['ng-annotate', 'babel?presets[]=es2015']
 		}, {
+			test: /\.css$/,
+			loader: ExtractTextPlugin.extract('style', 'css!postcss')
+		}, {
 			test: /\.scss$/,
-			loader: ExtractTextPlugin.extract('style', 'css!sass')
+			loader: ExtractTextPlugin.extract('style', 'css!sass!postcss')
+		}, {
+			test: /\.(png|jpg)$/,
+			loader: 'url-loader?limit=10000'
 		}, {
 			test: /\.html$/,
 			loader: 'html'
 		}]
+	},
+	postcss: function() {
+		return [
+			require('autoprefixer')({ /* ...options */ })
+		];
 	},
 	resolve: {
 		modulesDirectories: ['node_modules'],
@@ -60,18 +72,16 @@ module.exports = {
 	plugins: debug ? [] : [
 		new webpack.optimize.OccurenceOrderPlugin(),
 		new webpack.optimize.UglifyJsPlugin({
-			mangle: false,
+			// mangle: false,
 			sourceMap: false,
 			//忽略不必要的警告
 			compress: {
-				warnings: false,
-				booleans: false,
-				unused: false
+				warnings: false
 			}
 		}),
-		new ExtractTextPlugin('[name].[hash].css'), //提取样式生成文件
+		new ExtractTextPlugin('[name].[contenthash].css'), //提取样式生成文件
 		new webpack.optimize.CommonsChunkPlugin({
-			filename: 'commons.[hash].js',
+			filename: 'commons.[chunkhash].js',
 			name: 'commons',
 			chunks: ['app', 'app-2']
 		}),
@@ -117,7 +127,7 @@ module.exports = {
 			root: __dirname,
 			verbose: true,
 			dry: false,
-			exclude: ['shared.js']
+			exclude: []
 		})
 	],
 	// cdn资源
