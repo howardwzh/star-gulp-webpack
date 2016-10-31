@@ -28,7 +28,7 @@ module.exports = {
 	output: {
 		path: __dirname + '/public/',
 		filename: '[name]-[chunkhash].js',
-		// publicPath: __dirname + '/public/',
+		// publicPath: 'http://cdn.howard.com', // cdn时可设置
 		chunkFilename: '[name]-[chunkhash:8].js'
 	},
 	module: {
