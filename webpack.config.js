@@ -32,30 +32,42 @@ module.exports = {
 		chunkFilename: '[name]-[chunkhash:8].js'
 	},
 	module: {
-		preLoaders: [{
-			test: /\.js$/,
-			exclude: /node_modules/,
-			loader: 'eslint'
-		}],
+		preLoaders: [
+			// {
+			// 	test: /\.js$/,
+			// 	loader: 'string-replace-loader',// 替换文件中相应字符串，支持正则匹配
+			// 	query: {
+			// 		search: '\\/\\*\\s*prod remove start\\s*\\*\\/(\\s*.*\\s)*\\/\\*\\s*prod remove end\\s*\\*\\/',
+			// 		replace: '',
+			// 		flags: 'g'
+			// 	}
+			// }, 
+			{
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loader: 'eslint'
+			}
+		],
 		loaders: [{
-			test: /\.js$/,
-			exclude: /node_modules/,
-			loaders: ['ng-annotate', 'babel?presets[]=es2015']
-		}, {
-			test: /\.css$/,
-			loader: ExtractTextPlugin.extract('style', 'css!postcss')
-		}, {
-			test: /\.scss$/,
-			loader: ExtractTextPlugin.extract('style', 'css!sass!postcss')
-		}, 
-		// {
-		// 	test: /\.(png|jpg)$/,
-		// 	loader: 'url-loader?limit=10000' //必须是相对路径
-		// }, 
-		{
-			test: /\.html$/,
-			loader: 'html'
-		}]
+				test: /\.js$/,
+				exclude: /node_modules/,
+				loaders: ['ng-annotate', 'babel?presets[]=es2015']
+			}, {
+				test: /\.css$/,
+				loader: ExtractTextPlugin.extract('style', 'css!postcss')
+			}, {
+				test: /\.scss$/,
+				loader: ExtractTextPlugin.extract('style', 'css!sass!postcss')
+			},
+			// {
+			// 	test: /\.(png|jpg)$/,
+			// 	loader: 'url-loader?limit=10000' //必须是相对路径
+			// }, 
+			{
+				test: /\.html$/,
+				loader: 'html'
+			}
+		]
 	},
 	postcss: function() {
 		return [
