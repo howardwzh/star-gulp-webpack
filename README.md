@@ -1,7 +1,9 @@
 # star-gulp-webpack
 My star of gulp and webpack!
 
-## Reference
+## 参考文章
+
+- [gulp API 文档](http://www.gulpjs.com.cn/docs/api/)
 - [基于Gulp的前端自动化工程搭建](http://mrzhang123.github.io/2016/09/07/gulpUse/)
 - [Gulp 结构化最佳实践](http://gold.xitu.io/post/57bc5429128fe1005f99367e)
 - [入门Webpack，看这篇就够了](http://www.jianshu.com/p/42e11515c10f)
@@ -12,40 +14,80 @@ My star of gulp and webpack!
 - [如何打造一个令人愉悦的前端开发环境（二）](http://gold.xitu.io/post/57c940687db2a2007885b035)
 - [yarn-支持离线安装包文件](https://yarnpkg.com/en/docs/install#windows-tab)
 
-## R-Notes
-### gulp
-- 优化前端的开发流程的工具
-- 处理html压缩/预处理/条件编译，图片压缩，精灵图自动合并等任务
+## 学习笔记
 
-例：生成sprite图片和样式
+### gulp
+
+#### 启程
+
+1. 全局安装 gulp：
+`$ npm install --global gulp`
+
+2. 作为项目的开发依赖（devDependencies）安装：
+`$ npm install --save-dev gulp`
+
+3. 在项目根目录下创建一个名为 gulpfile.js 的文件：
 ```
 var gulp = require('gulp');
-var imagemin = require('gulp-imagemin');
-var merge = require('merge-stream');
-var spritesmith = require('gulp.spritesmith');
-var conf = require('./conf');
-
-gulp.task('sprite:icon', function () {
-  var spriteData = gulp.src(conf.paths.sprite+'/icon/*.{png,gif,jpg}')
-  .pipe(spritesmith({
-    imgName: 'sprite_icon.png',
-    cssName: 'sprite_icon.css',
-    padding: 5,
-    algorithm: 'top-down',
-    cssTemplate: conf.paths.sprite+'/icon.template.mustache'
-  }));
-  
-  var imgStream = spriteData.img
-    .pipe(imagemin())
-    .pipe(gulp.dest(conf.paths.images));
-
-  // Pipe CSS stream through CSS optimizer and onto disk
-  var cssStream = spriteData.css
-    .pipe(gulp.dest(conf.paths.styles));
-
-  return merge(imgStream, cssStream);
+gulp.task('default', function() {
+  // 将你的默认的任务代码放在这
 });
 ```
+4. 运行 gulp：
+`$ gulp`
+
+默认的名为 default 的任务（task）将会被运行，在这里，这个任务并未做任何事情。
+
+想要单独执行特定的任务（task），请输入 gulp <task> <othertask>。
+
+#### 基础
+
+1. `gulp.src(globs[, options])`
+
+```
+gulp.src('client/templates/*.jade')
+  .pipe(jade())
+  .pipe(minify())
+  .pipe(gulp.dest('build/minified_templates'));
+```
+glob 请参考 node-glob 语法 或者，你也可以直接写文件的路径。
+
+> **globs**
+> 
+> 类型： String 或 Array
+> 所要读取的 glob 或者包含 globs 的数组。
+> 
+> **options**
+> 类型： Object
+> 通过 glob-stream 所传递给 node-glob 的参数。
+> 除了 node-glob 和 glob-stream 所支持的参数外，gulp 增加了一些额外的选项参数：
+> 
+> **options.buffer**
+> 类型： Boolean 默认值： true
+> 如果该项被设置为 false，那么将会以 stream 方式返回 file.contents 而不是文件 
+> buffer 的形式。这在处理一些大文件的时候将会很有用。
+> **注意：**插件可能并不会实现对 stream 的支持。
+> 
+> **options.read**
+> 类型： Boolean 默认值： true
+> 如果该项被设置为 false， 那么 file.contents 
+> 会返回空值（null），也就是并不会去读取文件。
+> 
+> **options.base**
+> 类型： String 默认值： 将会加在 glob 之前 (请看 glob2base)
+> 如, 请想像一下在一个路径为 client/js/somedir 的目录中，有一个文件叫 
+> somefile.js ：
+> 
+> ```
+> gulp.src('client/js/**/*.js') // 匹配 'client/js/somedir/somefile.js' 并且将 
+> `base` 解析为 `client/js/`
+> .pipe(minify())
+> .pipe(gulp.dest('build'));  // 写入 'build/somedir/somefile.js'
+> 
+> gulp.src('client/js/**/*.js', { base: 'client' })
+> .pipe(minify())
+> .pipe(gulp.dest('build'));  // 写入 'build/js/somedir/somefile.js'
+> ```
 
 ### webapck
 - 一种模块化的解决方案，不过Webpack的优点使得Webpack可以替代Gulp/Grunt类的工具
