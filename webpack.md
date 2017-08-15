@@ -1,8 +1,8 @@
 ## webapck配置
 
-> 参考文章：
-> [webpack配置说明文档](https://doc.webpack-china.org/configuration/)
-> [webpack容易混淆的部分](https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9)
+### 参考文章：
+- [webpack配置说明文档](https://doc.webpack-china.org/configuration/)
+- [webpack容易混淆的部分](https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9)
 
 ### entry 和 output
 ```js
