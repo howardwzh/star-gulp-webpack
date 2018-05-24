@@ -93,3 +93,7 @@ loader 可以配置参数
     }
 }
 ```
+
+### 一些常用的loader / plugins
+
+- webpack-bundle-analyzer 可以看到项目各模块的大小，可以按需优化
