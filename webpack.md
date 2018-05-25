@@ -97,3 +97,14 @@ loader 可以配置参数
 ### 一些常用的loader / plugins
 
 - webpack-bundle-analyzer 可以看到项目各模块的大小，可以按需优化
+- webpack4，不再支持extract-text-webpack-plugin
+
+### webpack4 兼容
+
+#### webpack4，不再支持extract-text-webpack-plugin
+原因：extract-text-webpack-plugin 最新版本为 3.0.2，这个版本还没有适应 webpack 4 的版本
+解决办法：使用 4.0 beta 版，`npm install --save-dev extract-text-webpack-plugin@next`
+
+#### webpack4 使用 html-webpack-plugin插件报错
+解决方法：
+`npm install webpack-contrib/html-webpack-plugin -D`
