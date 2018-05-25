@@ -1,0 +1,13 @@
+{
+  "name": "my-js-loader",
+  "version": "1.0.0",
+  "description": "simple loader for test",
+  "main": "index.js",
+  "author": "howard",
+  "license": "MIT",
+  "dependencies": {
+    "fs": "^0.0.1-security",
+    "loader-utils": "^1.1.0",
+    "path": "^0.12.7"
+  }
+}
