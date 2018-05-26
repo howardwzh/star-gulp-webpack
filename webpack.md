@@ -116,6 +116,9 @@ module.exports = {
 
 - webpack-bundle-analyzer 可以看到项目各模块的大小，可以按需优化
 
+### 配置
+> [官方详细配置文档](https://webpack.docschina.org/configuration/)
+
 ### webpack4 兼容
 
 - webpack4，不再支持extract-text-webpack-plugin
