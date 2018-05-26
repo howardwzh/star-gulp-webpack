@@ -100,7 +100,7 @@ module.exports = {
 ```
 
 ### 模式
-> 通过选择 development 或 production 之中的一个，来设置 mode 参数，你可以启用相应模式下的 webpack 内置的优化
+> 通过选择 `development` 或 `production` 之中的一个，来设置 mode 参数，你可以启用相应模式下的 webpack 内置的优化
 
 ```js
 module.exports = {
@@ -108,22 +108,25 @@ module.exports = {
 }
 ```
 
-### 一些常用的loader / plugins
+### 常用的**loader**
+> [官方列举的loaders](https://webpack.docschina.org/loaders/)
+
+### 常用的**plugins**
+> [官方列举的plugins](https://webpack.docschina.org/plugins/)
 
 - webpack-bundle-analyzer 可以看到项目各模块的大小，可以按需优化
 
 ### webpack4 兼容
 
-#### webpack4，不再支持extract-text-webpack-plugin
-原因：extract-text-webpack-plugin 最新版本为 3.0.2，这个版本还没有适应 webpack 4 的版本
-解决办法：使用 4.0 beta 版，`npm install --save-dev extract-text-webpack-plugin@next`
-
-#### webpack4 使用 html-webpack-plugin插件报错
-解决方法：
-`npm install webpack-contrib/html-webpack-plugin -D`
+- webpack4，不再支持extract-text-webpack-plugin
+    - 原因：extract-text-webpack-plugin 最新版本为 3.0.2，这个版本还没有适应 webpack 4 的版本
+    - 解决办法：使用 4.0 beta 版，`npm install --save-dev extract-text-webpack-plugin@next`
+- webpack4 使用 html-webpack-plugin插件报错
+    - 解决方法：`npm install webpack-contrib/html-webpack-plugin -D`
 
 ### 参考文章：
-- [webpack配置说明文档](https://doc.webpack-china.org/configuration/)
+- [webpack官方文档](https://webpack.docschina.org/concepts/)
+- [编写一个 loader](https://webpack.docschina.org/contribute/writing-a-loader/)
 - [webpack容易混淆的部分](https://medium.com/@rajaraodv/webpack-the-confusing-parts-58712f8fcad9)
 - [入门Webpack，看这篇就够了](http://www.jianshu.com/p/42e11515c10f)
 - [Webpack从入门到上线](http://yincheng.site/webpack)
