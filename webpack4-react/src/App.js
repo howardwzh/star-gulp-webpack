@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import _chunk from 'lodash/chunk'
 import './App.css';
 
 class App extends Component {
   render() {
+    const chunk = _chunk(['a', 'b', 'c', 'd'], 2);
+    // console.log(chunk)
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        { this.props.children }
+        {chunk}
       </div>
     );
   }
