@@ -15,6 +15,7 @@
     "test": "webpack --config  ./webpack.test.js"
   },
   "devDependencies": {
+    "schema-utils": "^0.4.5",
     "webpack-cli": "^2.1.3"
   }
 }
