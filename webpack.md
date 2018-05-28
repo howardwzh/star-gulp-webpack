@@ -51,10 +51,13 @@ module.exports = {
             test: /\.css$/,
             use: [{
                 loader: 'css-loader',
-                options: {
-                    ...
-                }
+                options: {...}
+            }, {
+                loader: 'postcss-loader',
+                options: {...}
             }]
+        }, {
+            ...
         }]
     }
 }
