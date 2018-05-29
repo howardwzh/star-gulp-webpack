@@ -1,0 +1,9 @@
+{
+  "name": "hello-world-plugin",
+  "version": "1.0.0",
+  "description": "simple loader for test",
+  "main": "index.js",
+  "author": "howard",
+  "license": "MIT",
+  "dependencies": {}
+}

@@ -1,6 +1,7 @@
 const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const CleanPlugin = require('clean-webpack-plugin')
+const HelloWorldPlugin = require('./plugins/hello-world-plugin/index')
 
 // Create multiple instances
 const extractHTML = new ExtractTextPlugin('[name].[chunkhash].html')
@@ -66,6 +67,7 @@ module.exports = {
   plugins: [
     new CleanPlugin(path.resolve(__dirname, 'public')),
     extractHTML,
-    extractCSS
+    extractCSS,
+    new HelloWorldPlugin({ options: true })
   ]
 }
