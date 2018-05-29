@@ -1,8 +1,8 @@
 import React from 'react';
 import Loadable from 'react-loadable';
 
-const LoadableHelper = (componetPath) => Loadable({
-  loader: () => import(`${componetPath}`),
+const LoadableHelper = (componentPath) => Loadable({
+  loader: () => import(`${componentPath}`),
   loading: () => <div>Loading...</div>,
 });
 

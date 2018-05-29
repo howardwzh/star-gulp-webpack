@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route } from 'react-router-dom'
-import LoadableHelper from './LoadableHelper';
+import AsyncLoadHelper from './AsyncLoadHelper';
+// import LoadableHelper from './LoadableHelper';
 import App from './App';
-// import Home from './components/Home';
-// import About from './components/About';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
 
-const Home = LoadableHelper('./components/Home');
-const About = LoadableHelper('./components/About');
+const Home = AsyncLoadHelper(() => import('./components/Home'));
+const About = AsyncLoadHelper(() => import('./components/About'));
 
 ReactDOM.render((
   <Router>
