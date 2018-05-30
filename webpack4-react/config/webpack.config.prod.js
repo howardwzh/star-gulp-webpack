@@ -126,10 +126,10 @@ module.exports = {
           // "url" loader works just like "file" loader but it also embeds
           // assets smaller than specified size as data URLs to avoid requests.
           {
-            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
+            test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/, /\.svg$/],
             loader: 'url-loader',
             options: {
-              limit: 10000,
+              limit: 100,
               name: 'static/media/[name].[hash:8].[ext]',
             },
           },
@@ -145,52 +145,46 @@ module.exports = {
           // tags. If you use code splitting, however, any async bundles will still
           // use the "style" loader inside the async code so CSS from them won't be
           // in the main CSS file.
-      {
-        loader: 'file-loader',
-        // Exclude `js` files to keep "css" loader working as it injects
-        // it's runtime that would otherwise processed through "file" loader.
-        // Also exclude `html` and `json` extensions so they get processed
-        // by webpacks internal loaders.
-        exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
-        options: {
-          name: 'static/media/[name].[hash:8].[ext]',
-        },
-      },
+      
       {
             test: /\.css$/,
-            use: ExtractTextPlugin.extract({
-              fallback: 'style-loader',
-              use: [
-                {
-                  loader: 'css-loader',
-                  options: {
-                    importLoaders: 1,
-                    minimize: true,
-                    sourceMap: shouldUseSourceMap,
-                  },
+            use: ExtractTextPlugin.extract(
+              Object.assign({
+                fallback: {
+                  loader: 'style-loader'
                 },
-                {
-                  loader: 'postcss-loader',
-                  options: {
-                    // Necessary for external CSS imports to work
-                    // https://github.com/facebookincubator/create-react-app/issues/2677
-                    ident: 'postcss',
-                    plugins: () => [
-                      require('postcss-flexbugs-fixes'),
-                      autoprefixer({
-                        browsers: [
-                          '>1%',
-                          'last 4 versions',
-                          'Firefox ESR',
-                          'not ie < 9', // React doesn't support IE8 anyway
-                        ],
-                        flexbox: 'no-2009',
-                      }),
-                    ],
+                use: [
+                  {
+                    loader: 'css-loader',
+                    options: {
+                      importLoaders: 1,
+                      minimize: true,
+                      sourceMap: shouldUseSourceMap,
+                    },
                   },
-                },
-              ],
-            }),
+                  {
+                    loader: 'postcss-loader',
+                    options: {
+                      // Necessary for external CSS imports to work
+                      // https://github.com/facebookincubator/create-react-app/issues/2677
+                      ident: 'postcss',
+                      plugins: () => [
+                        require('postcss-flexbugs-fixes'),
+                        autoprefixer({
+                          browsers: [
+                            '>1%',
+                            'last 4 versions',
+                            'Firefox ESR',
+                            'not ie < 9', // React doesn't support IE8 anyway
+                          ],
+                          flexbox: 'no-2009',
+                        }),
+                      ],
+                    },
+                  },
+                ],
+              }
+            )),
             // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
           },
           // "file" loader makes sure assets end up in the `build` folder.
@@ -200,16 +194,30 @@ module.exports = {
           
           // ** STOP ** Are you adding a new loader?
           // Make sure to add the new loader(s) before the "file" loader.
-      
+          // {
+          //   loader: 'file-loader',
+          //   // Exclude `js` files to keep "css" loader working as it injects
+          //   // it's runtime that would otherwise processed through "file" loader.
+          //   // Also exclude `html` and `json` extensions so they get processed
+          //   // by webpacks internal loaders.
+          //   exclude: [/\.(js|jsx|mjs)$/, /\.html$/, /\.json$/],
+          //   options: {
+          //     name: 'static/media/[name].[hash:8].[ext]',
+          //   },
+          // },
         ],
   },
   optimization: {
     splitChunks: {
+      chunks: "async",
+      minSize: 30000,
+      minChunks: 1,
+      name: true,
       cacheGroups: {
         vendors: {
-          chunks: 'initial',
+          chunks: 'all',
           minChunks: 2,
-          test: /[\\/]node_modules[\\/]/,
+          test: /node_modules/,
           priority: -10,
           name: 'vendors'
         },
