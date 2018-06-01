@@ -1,6 +1,6 @@
 function HelloWorldPlugin(options) {
   // 使用 options 设置插件实例……
-  console.log(options)
+  // console.log(options)
 }
 
 HelloWorldPlugin.prototype.apply = (compiler) => {
@@ -10,7 +10,7 @@ HelloWorldPlugin.prototype.apply = (compiler) => {
     for (const k in compilation.assets) {
       fileList += `- ${k}\n`
     }
-    console.log(fileList)
+    // console.log(fileList)
     compilation.assets['fileList.md'] = {
       source: () => fileList,
       size: () => fileList.length
