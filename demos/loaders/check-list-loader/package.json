@@ -1,0 +1,11 @@
+{
+  "name": "check-list-loader",
+  "version": "1.0.0",
+  "description": "check list loader",
+  "main": "index.js",
+  "author": "howard",
+  "license": "MIT",
+  "dependencies": {
+    "loader-utils": "^1.1.0"
+  }
+}
