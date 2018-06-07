@@ -26,7 +26,14 @@ module.exports = {
     rules: [{
       test: /\.js$/,
       include: path.resolve(__dirname, 'src'),
-      use: ['my-js-loader']
+      loader: 'check-list-loader',
+      options: {
+        checkList: [{
+          rule: /https?:\/\/\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3}(:\d*)?/, // 错误正则匹配
+          msg: '线上发布脚本中不能含有本地测试ip！请删除后再执行发布操作。', // 错误消息
+          type: 'warn' // 错误类型，error|warn，可不写默认error
+        }]
+      }
     }, {
         test: /\.html$/,
         include: path.resolve(__dirname, 'src'),

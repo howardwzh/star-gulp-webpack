@@ -1,7 +1,7 @@
 /**
  * 针对指定文件类型的checkList，不同文件类型可使用不同规则，一般是js脚本
  * 
- * example:
+ * example in webpack.config.js:
  * 
  * {
  *    test: /\.js$/,
@@ -16,10 +16,11 @@
  * }
  */
 const getOptions = require('loader-utils').getOptions
+const _checkList = require('./utils/check-list.js') // 内置基本检测项
 
 module.exports = function (source) {
-  const options = getOptions(this)
-  const checkList = options.checkList || []
+  const options = getOptions(this) || {}
+  const checkList = _checkList.concat(options.checkList || []) // 合并自定义检测项
   checkList.forEach(item => {
     if(item.rule.test(source)) {
       const emitType = item.type === 'warn' ? 'emitWarning' : 'emitError'
